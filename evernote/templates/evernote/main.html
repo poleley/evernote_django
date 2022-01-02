@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Все заметки</title>
+    <link rel="stylesheet" href="{% static 'evernote/css/style3.css' %}">
+</head>
+
+<body>
+<div class="main">
+    <div class="leftBlock">
+        <div class="id">
+            <p class="username">Иван Иванов</p>
+        </div>
+        <div class="filter">
+            <div class="filter1">
+                Отсортировать:
+            </div>
+            <button class="filterBy">по дате</button>
+            <button class="filterBy">по тэгу</button>
+        </div>
+        <div class="addNew">
+            <button class="addNewNote">Создать новую заметку</button>
+        </div>
+    </div>
+    <div class="rightBlock">
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №1
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="noteDate">
+                14.11.2021
+            </div>
+            <div class="noteTags">
+                <span class="noteTag">#lorem</span>
+                <span class="noteTag">#ipsum</span>
+                <span class="noteTag">#dolor</span>
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №2
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="noteDate">
+                13.11.2021
+            </div>
+            <div class="noteTags">
+                <span class="noteTag">#lorem</span>
+                <span class="noteTag">#ipsum</span>
+                <span class="noteTag">#dolor</span>
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №3
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="noteDate">
+                1.11.2021
+            </div>
+            <div class="noteTags">
+                <span class="noteTag">#lorem</span>
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №4
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+            </div>
+            <div class="noteDate">
+                14.10.2021
+            </div>
+            <div class="noteTags">
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №5
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="noteDate">
+                10.10.2021
+            </div>
+            <div class="noteTags">
+                <span class="noteTag">#lorem</span>
+                <span class="noteTag">#ipsum</span>
+                <span class="noteTag">#dolor</span>
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №6
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="noteDate">
+                1.08.2021
+            </div>
+            <div class="noteTags">
+                <span class="noteTag">#lorem</span>
+                <span class="noteTag">#ipsum</span>
+                <span class="noteTag">#dolor</span>
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    Заметка №7
+                </div>
+                <div class="deleteNote1">
+                    <button class="deleteNote">
+                        <img src="{% static '/evernote/img/delete.png' %}">
+                    </button>
+                </div>
+            </div>
+            <div class="noteBody">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </div>
+            <div class="noteDate">
+                4.07.2021
+            </div>
+            <div class="noteTags">
+                <span class="noteTag">#lorem</span>
+                <span class="noteTag">#ipsum</span>
+                <span class="noteTag">#dolor</span>
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
