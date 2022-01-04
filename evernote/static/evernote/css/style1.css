@@ -33,7 +33,7 @@ body {
     margin-top: 94px;
     padding-bottom: 30px;
     text-align: center;
-    background-image: url(/static/evernote/img/pencil.jpg);
+    background-image: url(/evernote/static/evernote/img/pencil.jpg);
 }
 .whyEvernote {
     padding-top: 30px;
@@ -137,7 +137,7 @@ body {
     border-radius: 20px;
 }
 ul {
-    list-style-image: url(/static/evernote/img/li.png);
+    list-style-image: url(/evernote/static/evernote/img/li.png);
 }
 li {
     margin: 10px auto;
