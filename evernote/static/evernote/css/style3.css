@@ -67,7 +67,7 @@ html, body {
     overflow-y: auto;
     padding: 20px;
     width: 76%;
-    background-image: url(/evernote/static/evernote/img/pencil.jpg);
+    background-image: url(/static/evernote/img/pencil.jpg);
 }
 .divNote {
     font: 16px Georgia;

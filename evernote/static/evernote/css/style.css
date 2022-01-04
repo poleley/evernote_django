@@ -36,7 +36,7 @@ html, body {
     justify-content: center;
     height: calc(100% - 190px);
     text-align: center;
-    background-image: url(/evernote/static/evernote/img/pencil.jpg);
+    background-image: url(/static/evernote/img/pencil.jpg);
 }
 .registration {
     display: inline-block;
