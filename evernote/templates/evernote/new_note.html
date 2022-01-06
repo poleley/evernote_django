@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Все заметки</title>
+    <link rel="stylesheet" href="{% static 'evernote/css/style3.css' %}">
+</head>
+
+<body>
+<div class="main">
+    <div class="leftBlock">
+        <div class="id">
+            <p class="username">Иван Иванов</p>
+        </div>
+        <div class="filter">
+            <div class="filter1">
+                Отсортировать:
+            </div>
+            <button class="filterBy">по дате</button>
+            <button class="filterBy">по тэгу</button>
+        </div>
+        <div class="addNew">
+            <button class="addNewNote">Создать новую заметку</button>
+        </div>
+    </div>
+    <div class="rightBlock">
+        <div class="divNote">
+            <div class="noteRow">
+                <div class="noteTitle">
+                    <form action="{% url 'main_page' %}" method="post">
+                        {% csrf_token %}
+                        {{ add_note.as_p }}
+                        <button type="submit">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+            <div class="noteBody">
+
+            </div>
+            <div class="noteDate">
+
+            </div>
+            <div class="noteTags">
+                <button class="addNewTag">+</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>

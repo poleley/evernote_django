@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Регистрация</title>
-    <link rel="stylesheet" href="{% static 'evernote/css/style.css' %}">
+    <title>Войти</title>
+    <link rel="stylesheet" href="{% static 'evernote/css/login_style.css' %}">
 </head>
 
 <body>
@@ -13,22 +13,13 @@
     <div class="logo">
         <img src="{% static 'evernote/img/evernote_2018_logo.png' %}">
     </div>
-    <div class="signIn">
-        <a href="{% url 'login_page' %}">войти</a>
-    </div>
 </div>
 <div class="main">
-    <div class="registration">
+    <div class="login">
         <p>
-            Регистрация
+            Войти
         </p>
         <div>
-            <div class="registrationInfo">
-                <input type="text" placeholder="Имя">
-            </div>
-            <div class="registrationInfo">
-                <input type="text" placeholder="Фамилия">
-            </div>
             <div class="registrationInfo">
                 <input type="email" placeholder="Email">
             </div>

@@ -43,6 +43,22 @@ html, body {
     padding: 4px 8px;
     margin: 0 4px 0;
 }
+.filterForms {
+    border-radius: 12px;
+    border: 1px solid #dcdcdc;
+    background-color: #dcdcdc;
+    font: 16px Georgia;
+}
+.leftBlock .filterButton {
+    font: 16px Georgia;
+    background-color: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    height: 28px;
+    width: 100px;
+    padding: 4px 8px;
+    margin: 0 4px 0;
+}
 .deleteNote img {
     height: 24px;
     width: 20px;

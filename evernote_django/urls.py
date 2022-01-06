@@ -22,4 +22,6 @@ urlpatterns = [
     path('evernote/main', views.show_main, name='main_page'),
     path('evernote', views.landing, name='landing_page'),
     path('evernote/registration', views.registration, name='registration_page'),
+    path('evernote/login', views.login, name='login_page'),
+    path('evernote/add-note', views.new_note, name='add-note_page'),
 ]

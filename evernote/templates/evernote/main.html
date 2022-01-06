@@ -16,13 +16,25 @@
         </div>
         <div class="filter">
             <div class="filter1">
-                Отсортировать:
+                Отфильтровать:
             </div>
-            <button class="filterBy">по дате</button>
-            <button class="filterBy">по тэгу</button>
+            <form action="{% url 'main_page' %}" method="post">
+                {% csrf_token %}
+                <p><label class="filterBy"
+                          for="{{ filter_form.date.id_for_label }}">{{ filter_form.date.label }}</label>
+                    <span>{{ filter_form.date }}</span>
+                </p>
+                <p><label class="filterBy"
+                          for="{{ filter_form.tag.id_for_label }}">{{ filter_form.tag.label }}</label>
+                    <span>{{ filter_form.tag }}</span>
+                </p>
+                <button type="submit" class="filterButton">Применить</button>
+            </form>
         </div>
         <div class="addNew">
-            <button class="addNewNote">Создать новую заметку</button>
+            <a href="{% url 'add-note_page' %}">
+                <button class="addNewNote">Создать новую заметку</button>
+            </a>
         </div>
     </div>
     <div class="rightBlock">
@@ -48,7 +60,7 @@
                     {% for tag in tags %}
                         {% for el in note_has_tag %}
                             {% if note.pk == el.note_id and tag.pk == el.tag_id %}
-                            <span class="noteTag">#{{ tag.name }}</span>
+                                <span class="noteTag">#{{ tag.name }}</span>
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
