@@ -22,11 +22,11 @@
                 {% csrf_token %}
                 <p><label class="filterBy"
                           for="{{ filter_form.date.id_for_label }}">{{ filter_form.date.label }}</label>
-                    <span>{{ filter_form.date }}</span>
+                    {{ filter_form.date }}
                 </p>
                 <p><label class="filterBy"
                           for="{{ filter_form.tag.id_for_label }}">{{ filter_form.tag.label }}</label>
-                    <span>{{ filter_form.tag }}</span>
+                    {{ filter_form.tag }}
                 </p>
                 <button type="submit" class="filterButton">Применить</button>
             </form>

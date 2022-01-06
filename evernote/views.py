@@ -26,7 +26,13 @@ def show_main(request):
 def new_note(request):
     add_note = AddNoteForm()
     data = {'add_note': add_note}
-    return render(request, 'evernote/new_note.html')
+    return render(request, 'evernote/new_note.html', data)
+
+
+def new_tag(request):
+    add_tag = AddTagForm()
+    data = {'add_tag': add_tag}
+    return render(request, 'evernote/new_tag.html', data)
 
 
 def landing(request):

@@ -48,6 +48,9 @@ html, body {
     border: 1px solid #dcdcdc;
     background-color: #dcdcdc;
     font: 16px Georgia;
+    width: 150px;
+    padding: 0 6px;
+    height: 29px;
 }
 .leftBlock .filterButton {
     font: 16px Georgia;
@@ -55,7 +58,7 @@ html, body {
     border: 1px solid #e8e8e8;
     border-radius: 12px;
     height: 28px;
-    width: 100px;
+    width: 110px;
     padding: 4px 8px;
     margin: 0 4px 0;
 }
