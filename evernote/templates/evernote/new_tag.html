@@ -18,7 +18,7 @@
     <div class="rightBlock">
         <div class="divNote">
             <p class="noteTitlee">
-            <form action="{% url 'add-tag_page' %}" method="post">
+            <form action="{% url 'add-tag_page' idnote %}" method="post">
                 {% csrf_token %}
                 <p>
                     <label for="{{ add_note.name.id_for_label }}"></label>

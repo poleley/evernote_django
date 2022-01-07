@@ -16,7 +16,7 @@ class Note(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=45, null=False, unique=True)
+    name = models.CharField(max_length=45, null=False, unique=False)
 
     def __str__(self):
         return self.name

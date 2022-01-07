@@ -5,7 +5,7 @@ from .forms import *
 
 
 def show_main(request):
-    notes = Note.objects.all()
+    notes = Note.objects.all().order_by('-date')
     tags = Tag.objects.all()
     note_has_tag = NoteHasTag.objects.all()
     data = {'notes': notes, 'tags': tags, 'note_has_tag': note_has_tag}
@@ -41,15 +41,18 @@ def deletenote_page(request, idnote: int):
     return redirect('main_page')
 
 
-def new_tag(request):
+def new_tag(request, idnote: int):
+    tags = Tag.objects.all()
     if request.method == 'POST':
         add_tag = AddTagForm(request.POST)
         if add_tag.is_valid():
-            add_tag.save()
-            return redirect('main_page')
+            added_tag = add_tag.save()
+            note_has_tag = NoteHasTag(note_id=idnote, tag_id=added_tag.id)
+            note_has_tag.save()
+        return redirect('main_page')
     else:
         add_tag = AddTagForm()
-    data = {'add_tag': add_tag}
+    data = {'add_tag': add_tag, 'idnote': idnote}
     return render(request, 'evernote/new_tag.html', data)
 
 
