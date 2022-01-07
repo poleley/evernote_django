@@ -52,7 +52,7 @@ html, body {
     border: 1px solid rgb(0, 168, 45);
 }
 .allNotes {
-    margin: 10px 0;
+    margin: 6px 0 10px 0;
     border: 1px solid #dedede;
     width: 240px;
     height: 34px;
@@ -62,6 +62,7 @@ html, body {
     background-color: #dedede;
 }
 .noteTags {
+    font-family: Georgia;
     padding: 4px 8px;
     border: 1px solid #e8e8e8;
     border-radius: 16px;
