@@ -18,16 +18,11 @@
     <div class="rightBlock">
         <div class="divNote">
             <p class="noteTitlee">
-            <form action="{% url 'add-note_page' %}" method="post">
+            <form action="{% url 'add-tag_page' %}" method="post">
                 {% csrf_token %}
                 <p>
                     <label for="{{ add_note.name.id_for_label }}"></label>
-                    {{ add_note.name }}
-                </p>
-                </p>
-                <p>
-                    <label for="{{ add_note.text.id_for_label }}"></label>
-                    {{ add_note.text }}
+                    {{ add_tag.name }}
                 </p>
                 <button type="submit" class="save">Сохранить</button>
             </form>

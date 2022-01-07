@@ -39,6 +39,8 @@ html, body {
     background-image: url(/static/evernote/img/pencil.jpg);
 }
 .registration {
+    top: 0;
+    bottom: 0;
     display: inline-block;
     margin-top: 180px;
     height: 450px;

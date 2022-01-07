@@ -35,8 +35,20 @@ def new_note(request):
     return render(request, 'evernote/new_note.html', data)
 
 
+def deletenote_page(request, idnote: int):
+    note = Note.objects.get(pk=idnote)
+    note.delete()
+    return redirect('main_page')
+
+
 def new_tag(request):
-    add_tag = AddTagForm()
+    if request.method == 'POST':
+        add_tag = AddTagForm(request.POST)
+        if add_tag.is_valid():
+            add_tag.save()
+            return redirect('main_page')
+    else:
+        add_tag = AddTagForm()
     data = {'add_tag': add_tag}
     return render(request, 'evernote/new_tag.html', data)
 

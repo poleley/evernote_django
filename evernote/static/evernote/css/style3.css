@@ -82,6 +82,17 @@ html, body {
     font: 20px Georgia;
     color: white;
 }
+.allNotes {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: 1px solid #dedede;
+    width: 240px;
+    height: 34px;
+    color: #3f3f3f;
+    font: bold 18px Georgia;
+    border-radius: 16px;
+    background-color: #dedede;
+}
 .rightBlock {
     overflow-y: auto;
     padding: 20px;

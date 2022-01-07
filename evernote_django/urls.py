@@ -20,6 +20,7 @@ from evernote import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('evernote/main', views.show_main, name='main_page'),
+    path('evernote/main/<int:idnote>', views.deletenote_page, name='delete-note_page'),
     path('evernote', views.landing, name='landing_page'),
     path('evernote/registration', views.registration, name='registration_page'),
     path('evernote/login', views.login, name='login_page'),
