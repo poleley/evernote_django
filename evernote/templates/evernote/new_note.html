@@ -24,13 +24,14 @@
                     <label for="{{ add_note.name.id_for_label }}"></label>
                     {{ add_note.name }}
                 </p>
-                </p>
+
                 <p>
                     <label for="{{ add_note.text.id_for_label }}"></label>
                     {{ add_note.text }}
                 </p>
                 <button type="submit" class="save">Сохранить</button>
             </form>
+            </p>
             <a href="{% url 'main_page' %}">
                 <button type="button" class="allNotes">Показать все заметки</button>
             </a>
