@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 from .forms import *
@@ -24,7 +24,13 @@ def show_main(request):
 
 
 def new_note(request):
-    add_note = AddNoteForm()
+    if request.method == 'POST':
+        add_note = AddNoteForm(request.POST)
+        if add_note.is_valid():
+            add_note.save()
+            return redirect('main_page')
+    else:
+        add_note = AddNoteForm()
     data = {'add_note': add_note}
     return render(request, 'evernote/new_note.html', data)
 
