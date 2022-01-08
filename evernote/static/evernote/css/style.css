@@ -42,8 +42,8 @@ html, body {
     top: 0;
     bottom: 0;
     display: inline-block;
-    margin-top: 180px;
-    height: 450px;
+    margin-top: 144px;
+    height: 460px;
     width: 580px;
     background-color: white;
     text-align: center;
@@ -51,7 +51,7 @@ html, body {
     box-shadow: 0 0 16px #dcdcdc;
 }
 .regTitle{
-    margin-bottom: 20px;
+    margin: 24px 0 20px 0;
     font: bold 40px "Georgia";
 }
 .regForm {
