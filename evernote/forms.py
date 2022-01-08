@@ -32,13 +32,15 @@ class FilterForm(forms.Form):
 
 
 class RegisterUserForm(UserCreationForm):
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'regForm', 'placeholder': 'Пароль'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'regForm', 'placeholder': 'Подтвердите пароль'}))
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'regForm', 'placeholder': 'Имя'}),
             'last_name': forms.TextInput(attrs={'class': 'regForm', 'placeholder': 'Фамилия'}),
-            'username': forms.TextInput(attrs={'class': 'regForm', 'placeholder': 'username'}),
+            'username': forms.TextInput(attrs={'class': 'regForm', 'placeholder': 'Username'}),
             'password1': forms.PasswordInput(attrs={'class': 'regForm', 'placeholder': 'Пароль'}),
             'password2': forms.PasswordInput(attrs={'class': 'regForm', 'placeholder': 'Подтвердите пароль'}),
         }

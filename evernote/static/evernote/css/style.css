@@ -65,9 +65,7 @@ html, body {
     padding: 8px;
 }
 .buttonContinue {
-    margin-top: 32px;
-}
-.buttonContinue button {
+    margin-top: 12px;
     height: 48px;
     width: 240px;
     font: 25px "Georgia";
