@@ -54,7 +54,7 @@ html, body {
     margin-bottom: 20px;
     font: bold 40px "Georgia";
 }
-input {
+.loginForm {
     margin-top: 16px;
     height: 40px;
     width: 200px;
@@ -65,9 +65,6 @@ input {
     padding: 8px;
 }
 .buttonContinue {
-    margin-top: 32px;
-}
-.buttonContinue button {
     height: 48px;
     width: 240px;
     font: 25px "Georgia";

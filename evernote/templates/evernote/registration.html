@@ -26,7 +26,8 @@
             <form method="post">
                 {% csrf_token %}
                 {% for f in form %}
-                <p>{{ f }}</p>
+                    <p>{{ f }}</p>
+                    <p>{{ f.errors }}</p>
                 {% endfor %}
                 <button type="submit" class="buttonContinue">Продолжить</button>
             </form>

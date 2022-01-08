@@ -20,20 +20,15 @@
             Войти
         </p>
         <div>
-            <div class="registrationInfo">
-                <input type="email" placeholder="Email">
-            </div>
-            <div class="registrationInfo">
-                <input type="password" placeholder="Пароль">
-            </div>
-        </div>
-        <div class="buttonContinue">
-            <a href="{% url 'main_page' %}">
-                <button>
-                    Продолжить
-                </button>
-            </a>
-
+            <form method="post">
+                {% csrf_token %}
+                <p>{{ form.non_field_errors }}</p>
+                {% for f in form %}
+                    <p>{{ f }}</p>
+                    <p>{{ f.error }}</p>
+                {% endfor %}
+                <button type="submit" class="buttonContinue">Продолжить</button>
+            </form>
         </div>
     </div>
 

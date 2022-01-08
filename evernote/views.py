@@ -1,7 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -10,34 +10,42 @@ from .forms import *
 
 
 def show_main(request):
-    notes = Note.objects.all().order_by('-date')
-    tags = Tag.objects.all()
-    note_has_tag = NoteHasTag.objects.all()
-    data = {'notes': notes, 'tags': tags, 'note_has_tag': note_has_tag}
-    if request.method == 'POST':
-        filter_form = FilterForm(request.POST)
-        if filter_form.is_valid():
-            if filter_form.cleaned_data['date'] is not None:
-                notes = notes.filter(date=filter_form.cleaned_data['date'])
-            if filter_form.cleaned_data['tag'] != '':
-                notes = notes.filter(notehastag__tag__name=filter_form.cleaned_data['tag'])
-            data['notes'] = notes
+    if request.user.is_authenticated:
+        notes = Note.objects.filter(person_id=request.user.id).order_by('-date')
+        tags = Tag.objects.all()
+        note_has_tag = NoteHasTag.objects.all()
+        data = {'notes': notes, 'tags': tags, 'note_has_tag': note_has_tag}
+        if request.method == 'POST':
+            filter_form = FilterForm(request.POST)
+            if filter_form.is_valid():
+                if filter_form.cleaned_data['date'] is not None:
+                    notes = notes.filter(date=filter_form.cleaned_data['date'])
+                if filter_form.cleaned_data['tag'] != '':
+                    notes = notes.filter(notehastag__tag__name=filter_form.cleaned_data['tag'])
+                data['notes'] = notes
+        else:
+            filter_form = FilterForm()
+        data['filter_form'] = filter_form
+        return render(request, 'evernote/main.html', data)
     else:
-        filter_form = FilterForm()
-    data['filter_form'] = filter_form
-    return render(request, 'evernote/main.html', data)
+        return redirect('registration_page')
 
 
 def new_note(request):
-    if request.method == 'POST':
-        add_note = AddNoteForm(request.POST)
-        if add_note.is_valid():
-            add_note.save()
-            return redirect('main_page')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            add_note = AddNoteForm(request.POST)
+            if add_note.is_valid():
+                added_note = add_note.save()
+                added_note.person = request.user
+                added_note.save()
+                return redirect('main_page')
+        else:
+            add_note = AddNoteForm()
+        data = {'add_note': add_note}
+        return render(request, 'evernote/new_note.html', data)
     else:
-        add_note = AddNoteForm()
-    data = {'add_note': add_note}
-    return render(request, 'evernote/new_note.html', data)
+        return redirect('registration_page')
 
 
 def deletenote_page(request, idnote: int):
@@ -66,18 +74,15 @@ def landing(request):
     return HttpResponse(response)
 
 
-def registration(request):
-    response = render(request, 'evernote/registration.html')
-    return HttpResponse(response)
+class LoginUser(LoginView):
+    form_class = LoginUserForm
+    template_name = 'evernote/login.html'
 
-
-def login(request):
-    response = render(request, 'evernote/login.html')
-    return HttpResponse(response)
+    def get_success_url(self):
+        return reverse_lazy('main_page')
 
 
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'evernote/registration.html'
     success_url = reverse_lazy('login_page')
-
