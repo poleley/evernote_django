@@ -49,24 +49,29 @@ def new_note(request):
 
 
 def deletenote_page(request, idnote: int):
-    note = Note.objects.get(pk=idnote)
-    note.delete()
-    return redirect('main_page')
+    if request.user.is_authenticated:
+        note = Note.objects.get(pk=idnote)
+        note.delete()
+        return redirect('main_page')
+    else:
+        return redirect('registration_page')
 
 
 def new_tag(request, idnote: int):
-    tags = Tag.objects.all()
-    if request.method == 'POST':
-        add_tag = AddTagForm(request.POST)
-        if add_tag.is_valid():
-            added_tag = add_tag.save()
-            note_has_tag = NoteHasTag(note_id=idnote, tag_id=added_tag.id)
-            note_has_tag.save()
-        return redirect('main_page')
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            add_tag = AddTagForm(request.POST)
+            if add_tag.is_valid():
+                added_tag = add_tag.save()
+                note_has_tag = NoteHasTag(note_id=idnote, tag_id=added_tag.id)
+                note_has_tag.save()
+            return redirect('main_page')
+        else:
+            add_tag = AddTagForm()
+        data = {'add_tag': add_tag, 'idnote': idnote}
+        return render(request, 'evernote/new_tag.html', data)
     else:
-        add_tag = AddTagForm()
-    data = {'add_tag': add_tag, 'idnote': idnote}
-    return render(request, 'evernote/new_tag.html', data)
+        return redirect('registration_page')
 
 
 def landing(request):
