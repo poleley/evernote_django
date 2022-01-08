@@ -1,5 +1,10 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 from .models import *
 from .forms import *
 
@@ -69,3 +74,10 @@ def registration(request):
 def login(request):
     response = render(request, 'evernote/login.html')
     return HttpResponse(response)
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm
+    template_name = 'evernote/registration.html'
+    success_url = reverse_lazy('login_page')
+

@@ -50,15 +50,15 @@ html, body {
     border-radius: 20px;
     box-shadow: 0 0 16px #dcdcdc;
 }
-.registration p {
+.regTitle{
     margin-bottom: 20px;
     font: bold 40px "Georgia";
 }
-input {
-    margin-top: 16px;
-    height: 40px;
+.regForm {
+    margin-top: 8px;
+    height: 30px;
     width: 200px;
-    font: 25px "Georgia";
+    font: 18px "Georgia";
     border-radius: 5px;
     border: 1px solid #dcdcdc;
     background-color: #dcdcdc;
