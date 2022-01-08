@@ -32,8 +32,14 @@ class FilterForm(forms.Form):
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'loginForm', 'placeholder': 'Username'})),
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'loginForm', 'placeholder': 'Пароль'})),
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'loginForm', 'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'loginForm', 'placeholder': 'Пароль'}))
+
+    class Meta:
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'loginForm', 'placeholder': 'Username'}),
+            'password': forms.PasswordInput(attrs={'class': 'loginForm', 'placeholder': 'Username'}),
+        }
 
 
 class RegisterUserForm(UserCreationForm):
