@@ -51,16 +51,6 @@ html, body {
     border-radius: 16px;
     border: 1px solid rgb(0, 168, 45);
 }
-.allNotes {
-    margin: 6px 0 10px 0;
-    border: 1px solid #dedede;
-    width: 240px;
-    height: 34px;
-    color: #3f3f3f;
-    font: bold 18px Georgia;
-    border-radius: 16px;
-    background-color: #dedede;
-}
 .noteTags {
     font-family: Georgia;
     padding: 4px 8px;

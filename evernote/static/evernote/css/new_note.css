@@ -75,17 +75,6 @@ html, body {
     border-radius: 16px;
     border: 1px solid rgb(0, 168, 45);
 }
-.allNotes {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    border: 1px solid #dedede;
-    width: 240px;
-    height: 34px;
-    color: #3f3f3f;
-    font: bold 18px Georgia;
-    border-radius: 16px;
-    background-color: #dedede;
-}
 .noteDate {
     padding: 4px 0;
     color: gray;
