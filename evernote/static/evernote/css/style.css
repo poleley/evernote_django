@@ -32,6 +32,7 @@ html, body {
     height: 60px;
 }
 .main {
+    position: relative;
     display: flex;
     justify-content: center;
     height: calc(100% - 190px);
@@ -41,8 +42,9 @@ html, body {
 .registration {
     top: 0;
     bottom: 0;
+    position: absolute;
     display: inline-block;
-    margin-top: 144px;
+    margin: auto 0;
     height: 460px;
     width: 580px;
     background-color: white;
