@@ -90,4 +90,4 @@ class LoginUser(LoginView):
 class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'evernote/registration.html'
-    success_url = reverse_lazy('login_page')
+    success_url = reverse_lazy('main_page')
