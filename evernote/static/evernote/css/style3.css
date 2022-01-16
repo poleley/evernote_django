@@ -24,7 +24,7 @@ html, body {
 }
 .leftBlock .username {
     font-weight: bold;
-    margin: 10px 0 24px;
+    margin: 10px 0 16px;
     font-size: 24px;
     color: rgb(0, 168, 45);
 }
@@ -82,11 +82,13 @@ html, body {
     font: 20px Georgia;
     color: white;
 }
-.leftBlock .logout {
+.leftBlock .logoutDiv {
     margin-bottom: 16px;
-    font: 20px Georgia;
+}
+.leftBlock .logout {
+    font: bold 22px Georgia;
     text-decoration: none;
-    color: #656565;
+    color: #09890e;
 }
 .allNotes {
     margin-top: 20px;
