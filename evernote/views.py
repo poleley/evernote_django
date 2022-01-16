@@ -97,3 +97,4 @@ class RegisterUser(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('main_page')
+
