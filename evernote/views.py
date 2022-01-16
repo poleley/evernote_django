@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
@@ -91,3 +92,8 @@ class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'evernote/registration.html'
     success_url = reverse_lazy('main_page')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('main_page')
