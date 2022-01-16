@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
@@ -78,6 +78,11 @@ def new_tag(request, idnote: int):
 def landing(request):
     response = render(request, 'evernote/index.html')
     return HttpResponse(response)
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('landing_page')
 
 
 class LoginUser(LoginView):

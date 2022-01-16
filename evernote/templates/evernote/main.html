@@ -14,6 +14,9 @@
         <div class="id">
             <p class="username">{{ user.first_name }} {{ user.last_name }}</p>
         </div>
+        <div>
+            <a href="{% url 'logout' %}" class="logout">Выйти</a>
+        </div>
         <div class="filter">
             <div class="filter1">
                 Отфильтровать:

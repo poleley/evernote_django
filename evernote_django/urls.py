@@ -25,6 +25,7 @@ urlpatterns = [
     path('evernote', views.landing, name='landing_page'),
     path('evernote/registration', RegisterUser.as_view(), name='registration_page'),
     path('evernote/login', LoginUser.as_view(), name='login_page'),
+    path('evernote/logout', views.logout_user, name='logout'),
     path('evernote/add-note', views.new_note, name='add-note_page'),
     path('evernote/add-tag/<int:idnote>', views.new_tag, name='add-tag_page'),
 ]

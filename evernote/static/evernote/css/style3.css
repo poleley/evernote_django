@@ -82,6 +82,12 @@ html, body {
     font: 20px Georgia;
     color: white;
 }
+.leftBlock .logout {
+    margin-bottom: 16px;
+    font: 20px Georgia;
+    text-decoration: none;
+    color: #656565;
+}
 .allNotes {
     margin-top: 20px;
     margin-bottom: 10px;
