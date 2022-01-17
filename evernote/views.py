@@ -35,7 +35,7 @@ def show_main(request):
 def new_note(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            add_note = AddNoteForm(request.POST)
+            add_note = AddNoteForm(request.POST, request.FILES)
             if add_note.is_valid():
                 added_note = add_note.save()
                 added_note.person = request.user

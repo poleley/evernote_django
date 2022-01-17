@@ -124,6 +124,10 @@ html, body {
     padding: 4px 0;
     text-align: justify;
 }
+.isFile {
+    color: lightgray;
+    font-family: Georgia;
+}
 .noteDate {
     padding: 4px 0;
     color: gray;

@@ -18,16 +18,21 @@
     <div class="rightBlock">
         <div class="divNote">
             <p class="noteTitlee">
-            <form action="{% url 'add-note_page' %}" method="post">
+            <form action="{% url 'add-note_page' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>
-                    <label for="{{ add_note.name.id_for_label }}"></label>
                     {{ add_note.name }}
                 </p>
-
                 <p>
-                    <label for="{{ add_note.text.id_for_label }}"></label>
                     {{ add_note.text }}
+                </p>
+                <p>
+                    <label for="{{ add_note.file.id_for_label }}">
+                        <span class="file">
+                            Прикрепить файл
+                        </span>
+                    </label>
+                    {{ add_note.file }}
                 </p>
                 <button type="submit" class="save">Сохранить</button>
             </form>

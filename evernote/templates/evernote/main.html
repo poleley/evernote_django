@@ -61,6 +61,11 @@
                 <div class="noteBody">
                     {{ note.text }}
                 </div>
+                {% if note.file %}
+                    <div class="isFile">
+                        К этой заметке прикреплен файл
+                    </div>
+                {% endif %}
                 <div class="noteDate">
                     {{ note.date }}
                 </div>
