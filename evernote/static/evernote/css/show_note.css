@@ -28,40 +28,6 @@ html, body {
     font-size: 24px;
     color: rgb(0, 168, 45);
 }
-.leftBlock .filter1 {
-    margin-bottom: 16px;
-    font: 20px Georgia;
-    color: #818181;
-}
-.leftBlock .filterBy {
-    font: 16px Georgia;
-    background-color: #e8e8e8;
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    height: 28px;
-    width: 84px;
-    padding: 4px 8px;
-    margin: 0 4px 0;
-}
-.filterForms {
-    border-radius: 12px;
-    border: 1px solid #dcdcdc;
-    background-color: #dcdcdc;
-    font: 16px Georgia;
-    width: 150px;
-    padding: 0 6px;
-    height: 29px;
-}
-.leftBlock .filterButton {
-    font: 16px Georgia;
-    background-color: #e8e8e8;
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    height: 28px;
-    width: 110px;
-    padding: 4px 8px;
-    margin: 0 4px 0;
-}
 .deleteNote img {
     height: 24px;
     width: 20px;
@@ -69,9 +35,6 @@ html, body {
 .deleteNote {
     border: none;
     background-color: white;
-}
-.leftBlock .filter {
-    margin-bottom: 24px;
 }
 .leftBlock .addNewNote {
     width: 300px;
@@ -120,20 +83,12 @@ html, body {
     font-weight: bold;
     padding: 0 0 8px 4px;
 }
-.showNote {
-    text-decoration: none;
-    color: #b2b2b2;
-    font-family: Georgia;
-}
-.deleteNote1 {
-    display: inline;
-}
 .noteBody {
     padding: 4px 0;
     text-align: justify;
 }
 .isFile {
-    color: #b2b2b2;
+    color: lightgray;
     font-family: Georgia;
 }
 .noteDate {

@@ -50,12 +50,17 @@
                     <div class="noteTitle">
                         {{ note.name|capfirst }}
                     </div>
-                    <div class="deleteNote1">
-                        <a href="main/{{ note.pk }}">
-                            <button class="deleteNote">
-                                <img src="{% static '/evernote/img/delete.png' %}">
-                            </button>
-                        </a>
+                    <div class="rightCorner">
+                            <span class="showNoteSpan">
+                            <a href="{% url 'show-note_page' note.pk %}" class="showNote">Детальный просмотр</a>
+                            </span>
+                        <div class="deleteNote1">
+                            <a href="main/{{ note.pk }}">
+                                <button class="deleteNote">
+                                    <img src="{% static '/evernote/img/delete.png' %}">
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="noteBody">

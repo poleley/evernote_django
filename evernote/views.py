@@ -32,6 +32,17 @@ def show_main(request):
         return redirect('registration_page')
 
 
+def show_note(request, idnote: int):
+    if request.user.is_authenticated:
+        note = Note.objects.get(pk=idnote)
+        tags = Tag.objects.all()
+        note_has_tag = NoteHasTag.objects.all()
+        data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag}
+        return render(request, 'evernote/show_note.html', data)
+    else:
+        return redirect('registration_page')
+
+
 def new_note(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -102,4 +113,3 @@ class RegisterUser(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('main_page')
-
