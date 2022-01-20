@@ -27,12 +27,9 @@
                     {{ add_note.text }}
                 </p>
                 <p>
-                    <label for="{{ add_note.file.id_for_label }}">
-                        <span class="file">
-                            Прикрепить файл
-                        </span>
+                    <label for="{{ add_note.file.id_for_label }}" class="file">
+                        {{ add_note.file }}
                     </label>
-                    {{ add_note.file }}
                 </p>
                 <button type="submit" class="save">Сохранить</button>
             </form>

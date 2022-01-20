@@ -26,7 +26,7 @@ class AddNoteForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'noteTitle', 'placeholder': 'Новая заметка'}),
             'text': forms.Textarea(
                 attrs={'class': 'noteBody', 'cols': 100, 'rows': 20, 'placeholder': 'Текст заметки'}),
-            'file': BinaryFileInput(attrs={'style': 'position: absolute; z-index: -1; opacity: 0; overflow: hidden;'})
+            'file': BinaryFileInput(attrs={'style': 'overflow: hidden;'})
         }
 
 

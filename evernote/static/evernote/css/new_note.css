@@ -76,6 +76,9 @@ html, body {
     border: 1px solid rgb(0, 168, 45);
 }
 .file {
+    font-family: Georgia;
+}
+.file button{
     font: 16px Georgia;
     color: white;
     width: 160px;
