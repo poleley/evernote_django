@@ -1,21 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from .models import *
-
-
-class BinaryFileInput(forms.ClearableFileInput):
-    def is_initial(self, value):
-        return bool(value)
-
-    def format_value(self, value):
-        if self.is_initial(value):
-            return f'{len(value)} bytes'
-
-    def value_from_datadict(self, data, files, name):
-        upload = super().value_from_datadict(data, files, name)
-        if upload:
-            return upload.read()
 
 
 class AddNoteForm(forms.ModelForm):
@@ -26,7 +13,6 @@ class AddNoteForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'noteTitle', 'placeholder': 'Новая заметка'}),
             'text': forms.Textarea(
                 attrs={'class': 'noteBody', 'cols': 100, 'rows': 20, 'placeholder': 'Текст заметки'}),
-            'file': BinaryFileInput(attrs={'style': 'overflow: hidden;'})
         }
 
 

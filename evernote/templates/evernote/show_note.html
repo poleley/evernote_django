@@ -46,9 +46,9 @@
                 {{ note.text }}
             </div>
             {% if note.file %}
-                <div class="isFile">
-                    К этой заметке прикреплен файл
-                </div>
+                <a href="{% url 'download-file_page' note.pk %}" class="isFile">
+                    Скачать файл {{ filename }}
+                </a>
             {% endif %}
             <div class="noteDate">
                 {{ note.date }}

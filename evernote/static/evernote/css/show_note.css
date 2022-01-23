@@ -90,6 +90,7 @@ html, body {
 .isFile {
     color: lightgray;
     font-family: Georgia;
+    text-decoration: none;
 }
 .noteDate {
     padding: 4px 0;

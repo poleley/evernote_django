@@ -10,7 +10,7 @@ class Note(models.Model):
     name = models.CharField(max_length=45, null=False)
     date = models.DateField(auto_now=True, null=False)
     text = models.TextField(null=True)
-    file = models.BinaryField(editable=True, null=True, blank=True)
+    file = models.FileField(upload_to='notes_files/', null=True, blank=True)
 
     def __str__(self):
         return self.name

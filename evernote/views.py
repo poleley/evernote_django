@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -37,7 +37,8 @@ def show_note(request, idnote: int):
         note = Note.objects.get(pk=idnote)
         tags = Tag.objects.all()
         note_has_tag = NoteHasTag.objects.all()
-        data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag}
+        filename = str(Note.objects.get(pk=idnote).file).rsplit('/', 1)[1]
+        data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag, 'filename': filename}
         return render(request, 'evernote/show_note.html', data)
     else:
         return redirect('registration_page')
@@ -58,6 +59,14 @@ def new_note(request):
         return render(request, 'evernote/new_note.html', data)
     else:
         return redirect('registration_page')
+
+
+def download_file(request, idnote: int):
+    file = Note.objects.get(pk=idnote).file
+    response = HttpResponse(file)
+    filename = str(file).rsplit('/', 1)[1]
+    response['Content-Disposition'] = f'attachment; filename={filename}'
+    return response
 
 
 def deletenote_page(request, idnote: int):
