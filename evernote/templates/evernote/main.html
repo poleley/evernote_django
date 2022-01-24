@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="noteBody">
-                    {{ note.text }}
+                    {{ note.text|truncatewords:50 }}
                 </div>
                 {% if note.file %}
                     <div class="isFile">

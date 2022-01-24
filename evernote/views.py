@@ -37,8 +37,11 @@ def show_note(request, idnote: int):
         note = Note.objects.get(pk=idnote)
         tags = Tag.objects.all()
         note_has_tag = NoteHasTag.objects.all()
-        filename = str(Note.objects.get(pk=idnote).file).rsplit('/', 1)[1]
-        data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag, 'filename': filename}
+        if note.file:
+            filename = str(Note.objects.get(pk=idnote).file).rsplit('/', 1)[1]
+            data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag, 'filename': filename}
+        else:
+            data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag}
         return render(request, 'evernote/show_note.html', data)
     else:
         return redirect('registration_page')
