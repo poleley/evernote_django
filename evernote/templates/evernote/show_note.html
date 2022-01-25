@@ -35,7 +35,7 @@
                     {{ note.name|capfirst }}
                 </div>
                 <div class="deleteNote1">
-                    <a href="main/{{ note.pk }}">
+                    <a href="{% url 'delete-note_page' note.pk %}">
                         <button class="deleteNote">
                             <img src="{% static '/evernote/img/delete.png' %}">
                         </button>
