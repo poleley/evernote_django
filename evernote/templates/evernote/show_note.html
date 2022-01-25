@@ -61,7 +61,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-                <a href="add-tag/{{ note.pk }}">
+                <a href="{% url 'add-tag_page' note.pk %}">
                     <button class=" addNewTag">+</button>
                 </a>
             </div>
