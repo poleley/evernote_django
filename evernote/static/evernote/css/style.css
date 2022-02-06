@@ -65,6 +65,7 @@ html, body {
     border: 1px solid #dcdcdc;
     background-color: #dcdcdc;
     padding: 8px;
+    outline: none;
 }
 .buttonContinue {
     margin-top: 12px;
@@ -90,4 +91,11 @@ html, body {
 .element {
     margin: 30px;
 }
-
+button:hover {
+    background-color: rgb(0, 201, 52);
+    border: 1px solid rgb(0, 201, 52);
+    cursor: pointer;
+}
+a:hover {
+    color: rgb(0, 201, 52);
+}

@@ -83,6 +83,11 @@ html, body {
 .noteTags {
     padding: 4px 0;
 }
+button:hover {
+    background-color: rgb(0, 201, 52);
+    border: 1px solid rgb(0, 201, 52);
+    cursor: pointer;
+}
 
 
 

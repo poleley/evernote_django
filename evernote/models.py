@@ -12,6 +12,10 @@ class Note(models.Model):
     text = models.TextField(null=True)
     file = models.FileField(upload_to='notes_files/', null=True, blank=True)
 
+    @property
+    def filename(self):
+        return str(self.file).rsplit('/', 1)[1]
+
     def __str__(self):
         return self.name
 

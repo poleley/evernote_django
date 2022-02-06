@@ -52,12 +52,14 @@
                     </div>
                     <div class="rightCorner">
                             <span class="showNoteSpan">
-                            <a href="{% url 'show-note_page' note.pk %}" class="showNote">Детальный просмотр</a>
+                            <a href=# data-id="{{ note.pk }}" class="showNote">
+                                Детальный просмотр
+                            </a>
                             </span>
                         <div class="deleteNote1">
                             <a href="main/{{ note.pk }}">
                                 <button class="deleteNote">
-                                    <img src="{% static '/evernote/img/delete.png' %}">
+                                    <img src="{% static '/evernote/img/delete-button.svg' %}">
                                 </button>
                             </a>
                         </div>
@@ -86,10 +88,73 @@
                         <button class=" addNewTag">+</button>
                     </a>
                 </div>
+
+                <div class="detailedView" data-id="{{ note.pk }}">
+                    <div class="detailedDivNote">
+                        <div class="noteRow">
+                            <div class="noteTitle">
+                                {{ note.name|capfirst }}
+                            </div>
+                            <div class="rightCorner">
+                                <div class="deleteNote1">
+                                    <a href="{% url 'delete-note_page' note.pk %}">
+                                        <button class="deleteNote">
+                                            <img src="{% static '/evernote/img/delete-button.svg' %}">
+                                        </button>
+                                    </a>
+                                </div>
+                                <img data-id="{{ note.pk }}" class="close"
+                                     src="{% static '/evernote/img/x-symbol-svgrepo-com.svg' %}">
+                            </div>
+                        </div>
+                        <div class="noteBody">
+                            {{ note.text }}
+                        </div>
+                        {% if note.file %}
+                            <a href="{% url 'download-file_page' note.pk %}" class="isFile">
+                                Скачать файл {{ note.filename }}
+                            </a>
+                        {% endif %}
+                        <div class="noteDate">
+                            {{ note.date }}
+                        </div>
+                        <div class="noteTags">
+                            {% for tag in tags %}
+                                {% for el in note_has_tag %}
+                                    {% if note.pk == el.note_id and tag.pk == el.tag_id %}
+                                        <span class="noteTag">#{{ tag.name }}</span>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            <a href="{% url 'add-tag_page' note.pk %}">
+                                <button class=" addNewTag">+</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>
 </div>
+
+<script>
+    "use strict";
+    let aShowNote = document.querySelectorAll('.showNote');
+    let detailedView = document.querySelectorAll('.detailedView');
+    for (let a of aShowNote) {
+        a.addEventListener('click', function () {
+            for (let note of detailedView) {
+                if (note.dataset.id === a.dataset.id) {
+                    let closeNote = note.querySelector('.close');
+                    note.classList.add('displayFlex');
+                    closeNote.addEventListener('click', function () {
+                        note.classList.remove('displayFlex');
+                    });
+                }
+            }
+        });
+    }
+</script>
 
 </body>
 

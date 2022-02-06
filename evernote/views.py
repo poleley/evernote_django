@@ -32,19 +32,19 @@ def show_main(request):
         return redirect('registration_page')
 
 
-def show_note(request, idnote: int):
-    if request.user.is_authenticated:
-        note = Note.objects.get(pk=idnote)
-        tags = Tag.objects.all()
-        note_has_tag = NoteHasTag.objects.all()
-        if note.file:
-            filename = str(Note.objects.get(pk=idnote).file).rsplit('/', 1)[1]
-            data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag, 'filename': filename}
-        else:
-            data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag}
-        return render(request, 'evernote/show_note.html', data)
-    else:
-        return redirect('registration_page')
+# def show_note(request, idnote: int):
+#     if request.user.is_authenticated:
+#         note = Note.objects.get(pk=idnote)
+#         tags = Tag.objects.all()
+#         note_has_tag = NoteHasTag.objects.all()
+#         if note.file:
+#             filename = str(Note.objects.get(pk=idnote).file).rsplit('/', 1)[1]
+#             data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag, 'filename': filename}
+#         else:
+#             data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag}
+#         return render(request, 'evernote/show_note.html', data)
+#     else:
+#         return redirect('registration_page')
 
 
 def new_note(request):
