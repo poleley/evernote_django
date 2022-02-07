@@ -13,9 +13,12 @@
     <div class="leftBlock">
         <div class="id">
             <p class="username">{{ user.first_name }} {{ user.last_name }}</p>
-        </div>
-        <div class="logoutDiv">
-            <a href="{% url 'logout' %}" class="logout">Выйти</a>
+            <img src="{% static '/evernote/img/Green_triangle.svg' %}" class="showMenu">
+            <div class="menu displayNone">
+                <p><a href="">Профиль</a></p>
+                <p><a href="">Помощь</a></p>
+                <p><a href="{% url 'logout' %}" class="logout">Выйти</a></p>
+            </div>
         </div>
         <div class="filter">
             <div class="filter1">
@@ -139,6 +142,15 @@
 
 <script>
     "use strict";
+
+    let showMenuButton = document.querySelector('.showMenu');
+    let menu = document.querySelector('.menu');
+    showMenuButton.addEventListener('click', function() {
+        menu.classList.toggle('displayBlock');
+    });
+
+
+
     let aShowNote = document.querySelectorAll('.showNote');
     let detailedView = document.querySelectorAll('.detailedView');
     for (let a of aShowNote) {

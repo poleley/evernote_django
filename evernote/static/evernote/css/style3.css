@@ -22,11 +22,38 @@ html, body {
     background-color: white;
     text-align: center;
 }
+.leftBlock .id {
+    display: flex;
+    position: relative;
+    align-items: center;
+    margin: 0 auto;
+}
 .leftBlock .username {
+    display: inline;
     font-weight: bold;
     margin: 10px 0 16px;
     font-size: 24px;
-    color: rgb(0, 168, 45);
+    color: rgb(1, 190, 4);
+}
+.leftBlock .showMenu {
+    margin-left: 4px;
+    display: inline;
+    height: 12px;
+    width: 16px;
+}
+.leftBlock .menu {
+    position: absolute;
+    top: 40px;
+    left: 140px;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.menu a {
+    font:20px Georgia;
+    text-decoration: none;
+    color: #01be04;
 }
 .leftBlock .filter1 {
     margin-bottom: 16px;
@@ -86,14 +113,6 @@ html, body {
     font: 20px Georgia;
     color: white;
     cursor: pointer;
-}
-.leftBlock .logoutDiv {
-    margin-bottom: 16px;
-}
-.leftBlock .logout {
-    font: bold 22px Georgia;
-    text-decoration: none;
-    color: #09890e;
 }
 .allNotes {
     margin-top: 20px;
@@ -187,10 +206,16 @@ html, body {
     right: 0;
     display: none;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+}
+.displayNone{
+    display: none;
 }
 .displayFlex {
     display: flex;
+}
+.displayBlock {
+    display: block;
 }
 .detailedDivNote {
     width: 70%;
@@ -228,4 +253,7 @@ html, body {
     cursor: pointer;
     opacity: .7;
 }
-
+.showMenu:hover {
+    cursor: pointer;
+    opacity: .8;
+}
