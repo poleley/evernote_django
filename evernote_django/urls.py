@@ -28,6 +28,5 @@ urlpatterns = [
     path('evernote/logout', views.logout_user, name='logout'),
     path('evernote/add-note', views.new_note, name='add-note_page'),
     path('evernote/add-tag/<int:idnote>', views.new_tag, name='add-tag_page'),
-    # path('evernote/show-note/<int:idnote>', views.show_note, name='show-note_page'),
     path('evernote/download-file/<int:idnote>', views.download_file, name='download-file_page'),
 ]

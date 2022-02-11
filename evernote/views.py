@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse, FileResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -32,21 +32,6 @@ def show_main(request):
         return redirect('registration_page')
 
 
-# def show_note(request, idnote: int):
-#     if request.user.is_authenticated:
-#         note = Note.objects.get(pk=idnote)
-#         tags = Tag.objects.all()
-#         note_has_tag = NoteHasTag.objects.all()
-#         if note.file:
-#             filename = str(Note.objects.get(pk=idnote).file).rsplit('/', 1)[1]
-#             data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag, 'filename': filename}
-#         else:
-#             data = {'note': note, 'tags': tags, 'note_has_tag': note_has_tag}
-#         return render(request, 'evernote/show_note.html', data)
-#     else:
-#         return redirect('registration_page')
-
-
 def new_note(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -74,11 +59,11 @@ def download_file(request, idnote: int):
 
 def deletenote_page(request, idnote: int):
     if request.user.is_authenticated:
-        note = Note.objects.get(pk=idnote)
-        note.delete()
-        return redirect('main_page')
-    else:
-        return redirect('registration_page')
+        Note.objects.get(pk=idnote).delete()
+        response = {
+            'success': 'true',
+        }
+        return JsonResponse(response)
 
 
 def new_tag(request, idnote: int):
