@@ -175,7 +175,7 @@
             ).then(
                 text => {
                     let note = document.querySelector('.divNote[data-id="' + button.dataset.id + '"]');
-                    note.style.display = "none";
+                    note.remove();
                 }
             );
         });
