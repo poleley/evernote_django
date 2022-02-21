@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from evernote import views
-from evernote.views import RegisterUser, LoginUser
+from evernote.views import RegisterUser, LoginUser, MainView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('evernote/main', views.show_main, name='main_page'),
+    # path('evernote/main', views.show_main, name='main_page'),
+    path('evernote/main', MainView.as_view(), name='main_page'),
     path('evernote/main/<int:idnote>', views.deletenote_page, name='delete-note_page'),
     path('evernote', views.landing, name='landing_page'),
     path('evernote/registration', RegisterUser.as_view(), name='registration_page'),

@@ -5,7 +5,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-
+from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from . import serializers
 from .models import *
 from .forms import *
 
@@ -30,6 +33,13 @@ def show_main(request):
         return render(request, 'evernote/main.html', data)
     else:
         return redirect('registration_page')
+
+
+class MainView(ListAPIView):
+    serializer_class = serializers.NoteSerializer
+
+    def get_queryset(self):
+        return Note.objects.all().order_by('-date')
 
 
 def new_note(request):
