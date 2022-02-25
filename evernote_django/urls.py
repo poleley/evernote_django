@@ -30,11 +30,11 @@ urlpatterns = [
     path('evernote/api/', include(router.urls)),
     ###
 
-    """
-               |
-    old routes |
-               v
-    """,
+    ###
+    ###            |
+    ### old routes |
+    ###            v
+    ###
 
     # path('evernote/main', views.show_main, name='main_page'),
     # path('evernote/api/notes', NotesAPIList.as_view(), name='notes_page'),
