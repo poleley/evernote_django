@@ -1,13 +1,17 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.forms import model_to_dict
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, FileResponse, JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from rest_framework.generics import ListAPIView
+from rest_framework import generics, status, mixins
+from rest_framework.renderers import StaticHTMLRenderer, TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
+
 from . import serializers
 from .models import *
 from .forms import *
@@ -35,11 +39,22 @@ def show_main(request):
         return redirect('registration_page')
 
 
-class MainView(ListAPIView):
+class NotesAPIList(generics.ListCreateAPIView):
+    queryset = Note.objects.all().order_by('-date')
     serializer_class = serializers.NoteSerializer
 
-    def get_queryset(self):
-        return Note.objects.all().order_by('-date')
+    def perform_create(self, serializer):
+        serializer.save(person=self.request.user)
+
+
+class TagAPICreate(generics.CreateAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = serializers.TagSerializer
+
+
+class NoteAPIUpdate(generics.UpdateAPIView):
+    queryset = Note.objects.all()
+    serializer_class = serializers.NoteSerializer
 
 
 def new_note(request):
@@ -57,6 +72,29 @@ def new_note(request):
         return render(request, 'evernote/new_note.html', data)
     else:
         return redirect('registration_page')
+
+
+class NoteViewSet(mixins.CreateModelMixin,
+                  mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin,
+                  mixins.DestroyModelMixin,
+                  mixins.ListModelMixin,
+                  GenericViewSet):
+    queryset = Note.objects.all()
+    serializer_class = serializers.NoteSerializer
+
+
+
+class New_Note(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'evernote/new_note.html'
+
+    def post(self, request):
+        serializer = serializers.NoteSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def download_file(request, idnote: int):
@@ -93,9 +131,30 @@ def new_tag(request, idnote: int):
         return redirect('registration_page')
 
 
-def landing(request):
-    response = render(request, 'evernote/index.html')
-    return HttpResponse(response)
+class New_Tag(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'evernote/new_tag.html'
+
+    def post(self, request):
+        serializer = serializers.TagSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# def landing(request):
+#     response = render(request, 'evernote/index.html')
+#     return HttpResponse(response)
+
+
+class Landing(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'evernote/index.html'
+
+    def get(self, request):
+        return Response()
 
 
 def logout_user(request):

@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Tag(models.Model):
+    name = models.CharField(max_length=45, null=False, unique=False)
+
+    def __str__(self):
+        return self.name
+
 
 class Note(models.Model):
     person = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -11,6 +17,7 @@ class Note(models.Model):
     date = models.DateField(auto_now=True, null=False)
     text = models.TextField(null=True)
     file = models.FileField(upload_to='notes_files/', null=True, blank=True)
+    tags = models.ManyToManyField(Tag)
 
     @property
     def filename(self):
@@ -20,13 +27,3 @@ class Note(models.Model):
         return self.name
 
 
-class Tag(models.Model):
-    name = models.CharField(max_length=45, null=False, unique=False)
-
-    def __str__(self):
-        return self.name
-
-
-class NoteHasTag(models.Model):
-    note = models.ForeignKey(Note, on_delete=models.CASCADE, null=False)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, null=False)
