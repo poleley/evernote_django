@@ -98,11 +98,6 @@ class NoteViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class NoteDelete(generics.DestroyAPIView):
-    queryset = Note.objects.all()
-    serializer_class = serializers.NoteSerializer
-
-
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = serializers.TagSerializer
