@@ -1,4 +1,24 @@
+// import Cookies from 'js-cookie'
 "use strict";
+
+// let csrftoken = Cookies.get('csrftoken');
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
 
 const rightBlock = document.querySelector('.rightBlock');
 
@@ -51,11 +71,30 @@ fetch('/evernote/api/notes').then(
             let deleteNote = document.createElement("button");
             deleteNote.classList.add('deleteNote');
             deleteNote.setAttribute("data-id", note.id);
-            a.insertBefore(deleteNote, null);
+            deleteNote1.insertBefore(deleteNote, null);
 
             let img = new Image();
-            img.src = "/evernote/img/delete-button.svg";
-            deleteNote.insertBefore(img, null);
+            img.src = "https://www.svgrepo.com/show/79440/delete-button.svg";
+            img.classList.add('deleteNote')
+            rightCorner.insertBefore(img, null);
+            img.addEventListener('click', function () {
+                fetch('/evernote/api/notes/' + img.dataset.id, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    }
+                }).then(
+                    response => {
+                        return response.text();
+                    }
+                ).then(
+                    text => {
+                        divNote.remove();
+                        detailedView.remove();
+                    }
+                );
+            });
+
 
             let noteBody = document.createElement("div");
             noteBody.classList.add('noteBody');
@@ -130,14 +169,21 @@ fetch('/evernote/api/notes').then(
 
             deleteNote = document.createElement("button");
             deleteNote.classList.add('deleteNote');
-            deleteNote.innerHTML = "Удалить";
             deleteNote.setAttribute("data-id", note.id);
             a.insertBefore(deleteNote, null);
-            deleteNote.addEventListener('click', function () {
-                fetch('/evernote/api/notes/' + deleteNote.dataset.id + '/', {
+
+            img = new Image();
+            img.src = "https://www.svgrepo.com/show/79440/delete-button.svg";
+            deleteNote.insertBefore(img, null);
+            img.addEventListener('click', function () {
+                fetch('/evernote/api/notes/' + img.dataset.id, {
                     method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    }
                 }).then(
                     response => {
+                        console.log({response});
                         return response.text();
                     }
                 ).then(
@@ -149,20 +195,11 @@ fetch('/evernote/api/notes').then(
             });
 
             img = new Image();
-            img.src = "/evernote/img/delete-button.svg";
-            deleteNote.insertBefore(img, null);
-
-            img = new Image();
-            img.src = "/evernote/img/x-symbol-svgrepo-com.svg";
+            img.src = "http://cdn.onlinewebfonts.com/svg/img_251634.png";
             img.setAttribute("data-id", note.id);
             img.classList.add('close');
             deleteNote1.insertBefore(img, null);
-
-            let close = document.createElement("span");
-            close.innerHTML = "Закрыть";
-            close.classList.add('close');
-            deleteNote1.insertBefore(close, null);
-            close.addEventListener('click', function () {
+            img.addEventListener('click', function () {
                 detailedView.classList.remove('displayFlex');
             })
 

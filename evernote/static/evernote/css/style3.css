@@ -98,8 +98,10 @@ html, body {
     opacity: .4;
 }
 .deleteNote {
-    border: none;
-    background-color: white;
+    height: 32px;
+    width: 20px;
+    opacity: .4;
+    margin: 0 4px;
 }
 .leftBlock .filter {
     margin-bottom: 24px;
@@ -135,6 +137,7 @@ html, body {
 .rightCorner {
     display: flex;
     align-items: center;
+    text-align: center;
 }
 .divNote {
     font: 16px Georgia;
@@ -156,11 +159,16 @@ html, body {
 }
 .deleteNote1 {
     display: inline;
+    margin: auto 0;
+}
+.deleteNote1 a {
+    margin: auto 0;
 }
 .close {
     height: 16px;
     width: 16px;
     opacity: .5;
+    margin: 6.5px 0;
 }
 .noteBody {
     padding: 4px 0;
@@ -224,6 +232,10 @@ html, body {
     border-radius: 16px;
 }
 .deleteNote img:hover {
+    opacity: .7;
+    cursor: pointer;
+}
+.deleteNote:hover {
     opacity: .7;
     cursor: pointer;
 }

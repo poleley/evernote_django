@@ -18,6 +18,7 @@ from django.urls import path, include
 from evernote import views
 from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, TagViewSet, MainPage
 from rest_framework import routers
+from django.views.decorators.csrf import csrf_exempt
 
 router = routers.SimpleRouter()
 router.register(r'notes', NoteViewSet)
@@ -27,12 +28,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('evernote/api/', include(router.urls)),
 
+    # path('evernote/api/auth/', include('rest_framework.urls')),
     ###            |
     ### old routes |
     ###            v
     ###
 
-    path('evernote/main', MainPage.as_view(), name='main_page'),
+    path('evernote/main', csrf_exempt(MainPage.as_view()), name='main_page'),
     # path('evernote/api/notes', NotesAPIList.as_view(), name='notes_page'),
     # path('evernote/api/tags', TagAPICreate.as_view(), name='create_tag'),
     # path('evernote/api/note/<int:pk>', NoteAPIUpdate.as_view(), name='create_note'),
