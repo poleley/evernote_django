@@ -12,7 +12,7 @@ class Tag(models.Model):
 
 
 class Note(models.Model):
-    person = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    person = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=45, null=False)
     date = models.DateField(auto_now=True, null=False)
     text = models.TextField(null=True)
