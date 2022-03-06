@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from evernote import views
-from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, TagViewSet, MainPage, NoteDelete
+from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, TagViewSet, MainPage
 from rest_framework import routers
 
 router = routers.SimpleRouter()
