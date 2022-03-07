@@ -18,20 +18,19 @@
     <div class="rightBlock">
         <div class="divNote">
             <p class="noteTitlee">
-                <input
-{#            <form action="{% url 'add-note_page' %}" method="post" enctype="multipart/form-data">#}
-{#                {% csrf_token %}#}
-{#                <p>#}
-{#                    {{ add_note.name }}#}
-{#                </p>#}
-{#                <p>#}
-{#                    {{ add_note.text }}#}
-{#                </p>#}
-{#                <p>#}
-{#                    {{ add_note.file }}#}
-{#                </p>#}
-{#                <button type="submit" class="save">Сохранить</button>#}
-{#            </form>#}
+            <form action="{% url 'add-note_page' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>
+                    {{ add_note.name }}
+                </p>
+                <p>
+                    {{ add_note.text }}
+                </p>
+                <p>
+                    {{ add_note.file }}
+                </p>
+                <button type="submit" class="save">Сохранить</button>
+            </form>
             </p>
         </div>
     </div>

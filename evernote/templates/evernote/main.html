@@ -22,27 +22,10 @@
             </div>
         </div>
         <div class="filter">
+
             <div class="filter1">
                 Отфильтровать:
             </div>
-            {#            <form action="{% url 'main_page' %}" method="post">#}
-            {#                {% csrf_token %}#}
-            {#                <p>#}
-            {#                    {% render_form filter_form %}#}
-            {#                </p>#}
-            {#                <p>#}
-            {#                    #}
-            {#                </p>#}
-            {#                <p><label class="filterBy"#}
-            {#                          for="{{ filter_form.date.id_for_label }}">{{ filter_form.date.label }}</label>#}
-            {#                    <span class="filterForms">{% render_form filter_form %}</span>#}
-            {#                </p>#}
-            {#                <p><label class="filterBy"#}
-            {#                          for="{{ filter_form.tag.id_for_label }}">{{ filter_form.tag.label }}</label>#}
-            {#                    {% render_form filter_form.tag %}#}
-            {#                </p>#}
-            {#                <button type="submit" class="filterButton">Применить</button>#}
-            {#            </form>#}
             <p>
                 <label class="filterForms">
                     По дате:
@@ -57,9 +40,8 @@
             </p>
             <button class="filterButton">Применить</button>
 
-            <a href="{% url 'main_page' %}">
-                <button class="allNotes">Показать все заметки</button>
-            </a>
+            <button class="allNotes">Показать все заметки</button>
+
         </div>
         <div class="addNew">
             <a href="{% url 'add-note_page' %}">
