@@ -18,24 +18,27 @@
     <div class="rightBlock">
         <div class="divNote">
             <p class="noteTitlee">
-            <form action="{% url 'add-note_page' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p>
-                    {{ add_note.name }}
-                </p>
-                <p>
-                    {{ add_note.text }}
-                </p>
-                <p>
-                    {{ add_note.file }}
-                </p>
-                <button type="submit" class="save">Сохранить</button>
-            </form>
+                <input
+{#            <form action="{% url 'add-note_page' %}" method="post" enctype="multipart/form-data">#}
+{#                {% csrf_token %}#}
+{#                <p>#}
+{#                    {{ add_note.name }}#}
+{#                </p>#}
+{#                <p>#}
+{#                    {{ add_note.text }}#}
+{#                </p>#}
+{#                <p>#}
+{#                    {{ add_note.file }}#}
+{#                </p>#}
+{#                <button type="submit" class="save">Сохранить</button>#}
+{#            </form>#}
             </p>
         </div>
     </div>
 
 </div>
+
+<script src="/evernote/static/evernote/js/new_note.js"></script>
 
 </body>
 

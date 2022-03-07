@@ -76,7 +76,8 @@ html, body {
     background-color: #dcdcdc;
     font: 16px Georgia;
     width: 150px;
-    padding: 0 6px;
+    padding: 4px 6px;
+    margin: 0 4px;
     height: 29px;
     outline: none;
     cursor: pointer;
@@ -193,6 +194,7 @@ html, body {
     background-color: #e8e8e8;
     border-radius: 12px;
     padding: 4px 8px;
+    margin: 0 2px;
 }
 .addNewTag {
     border: 1px solid rgb(143, 143, 143);

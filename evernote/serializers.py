@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from evernote.models import *
@@ -28,4 +30,4 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = ('id', 'person', 'name', 'date', 'text', 'file', 'tags')
-        #read_only_fields = ('tags',)
+        # read_only_fields = ('tags',)

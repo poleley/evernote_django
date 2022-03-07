@@ -1,4 +1,5 @@
 {% load static %}
+{% load rest_framework %}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -24,18 +25,38 @@
             <div class="filter1">
                 Отфильтровать:
             </div>
-            <form action="{% url 'main_page' %}" method="post">
-                {% csrf_token %}
-                <p><label class="filterBy"
-                          for="{{ filter_form.date.id_for_label }}">{{ filter_form.date.label }}</label>
-                    {{ filter_form.date }}
-                </p>
-                <p><label class="filterBy"
-                          for="{{ filter_form.tag.id_for_label }}">{{ filter_form.tag.label }}</label>
-                    {{ filter_form.tag }}
-                </p>
-                <button type="submit" class="filterButton">Применить</button>
-            </form>
+            {#            <form action="{% url 'main_page' %}" method="post">#}
+            {#                {% csrf_token %}#}
+            {#                <p>#}
+            {#                    {% render_form filter_form %}#}
+            {#                </p>#}
+            {#                <p>#}
+            {#                    #}
+            {#                </p>#}
+            {#                <p><label class="filterBy"#}
+            {#                          for="{{ filter_form.date.id_for_label }}">{{ filter_form.date.label }}</label>#}
+            {#                    <span class="filterForms">{% render_form filter_form %}</span>#}
+            {#                </p>#}
+            {#                <p><label class="filterBy"#}
+            {#                          for="{{ filter_form.tag.id_for_label }}">{{ filter_form.tag.label }}</label>#}
+            {#                    {% render_form filter_form.tag %}#}
+            {#                </p>#}
+            {#                <button type="submit" class="filterButton">Применить</button>#}
+            {#            </form>#}
+            <p>
+                <label class="filterForms">
+                    По дате:
+                </label>
+                <input type="date" class="filterForms filterDate">
+            </p>
+            <p>
+                <label class="filterForms">
+                    По тегу:
+                </label>
+                <input type="text" class="filterForms filterTag">
+            </p>
+            <button class="filterButton">Применить</button>
+
             <a href="{% url 'main_page' %}">
                 <button class="allNotes">Показать все заметки</button>
             </a>

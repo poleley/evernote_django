@@ -44,10 +44,9 @@ class MainPage(APIView):
     template_name = 'evernote/main.html'
 
     def get(self, request):
-        return Response()
-        # if request.user.is_authenticated:
-        #     return Response()
-        # return redirect('registration_page')
+        if request.user.is_authenticated:
+            return Response()
+        return redirect('registration_page')
 
 
 # class NotesAPIList(generics.ListCreateAPIView):
@@ -92,7 +91,14 @@ class NoteViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        return Note.objects.filter(person=self.request.user)
+        queryset = Note.objects.filter(person=self.request.user)
+        date = self.request.query_params.get('date')
+        tags = self.request.query_params.get('tags')
+        if date is not None:
+            queryset = queryset.filter(date=date)
+        if tags is not None:
+            queryset = queryset.filter(tags=tags)
+        return queryset
 
 
 class TagViewSet(viewsets.ModelViewSet):
