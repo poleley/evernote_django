@@ -49,22 +49,25 @@ class MainPage(APIView):
         return redirect('registration_page')
 
 
-# class NotesAPIList(generics.ListCreateAPIView):
-#     queryset = Note.objects.all().order_by('-date')
-#     serializer_class = serializers.NoteSerializer
-#
-#     def perform_create(self, serializer):
-#         serializer.save(person=self.request.user)
-#
-#
-# class TagAPICreate(generics.CreateAPIView):
-#     queryset = Tag.objects.all()
-#     serializer_class = serializers.TagSerializer
-#
-#
-# class NoteAPIUpdate(generics.UpdateAPIView):
-#     queryset = Note.objects.all()
-#     serializer_class = serializers.NoteSerializer
+class NewNotePage(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'evernote/new_note.html'
+
+    def get(self, request):
+        note_form = AddNoteForm()
+        # note_form = serializers.NoteSerializer
+        if request.user.is_authenticated:
+            return Response({'note_form': note_form})
+        else:
+            return redirect('registration_page')
+
+    def post(self, request):
+        note_form = AddNoteForm(request.POST, request.FILES)
+        # note_form = serializers.NoteSerializer(data=request.data)
+        if request.user.is_authenticated:
+            return Response({'note_form': note_form})
+        else:
+            return redirect('registration_page')
 
 
 def new_note(request):
@@ -91,7 +94,7 @@ class NoteViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        queryset = Note.objects.filter(person=self.request.user)
+        queryset = Note.objects.filter(person=self.request.user).order_by('-date')
         date = self.request.query_params.get('date')
         tags = self.request.query_params.get('tags')
         if date is not None:

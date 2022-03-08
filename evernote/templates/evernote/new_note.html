@@ -1,4 +1,5 @@
 {% load static %}
+{% load rest_framework %}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -17,27 +18,41 @@
     </div>
     <div class="rightBlock">
         <div class="divNote">
-            <p class="noteTitlee">
+            {#            <form action="" method="post" enctype="multipart/form-data">#}
+            {#                {% csrf_token %}#}
+            {#                <p>#}
+            {#                    <input name="name" type="text" class="noteTitle" placeholder="Название заметки">#}
+            {#                </p>#}
+            {#                <p>#}
+            {#                    <textarea name="text" class="noteBody" placeholder="Текст заметки" cols="100" rows="20"></textarea>#}
+            {#                </p>#}
+            {#                <p>#}
+            {#                    <input name="file" type="file" placeholder="Прикрепите файл" class="file">#}
+            {#                </p>#}
+            {#                <button class="save">Сохранить</button>#}
+            {#            </form>#}
             <form action="{% url 'add-note_page' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>
-                    {{ add_note.name }}
+                    {{ note_form.name }}
                 </p>
                 <p>
-                    {{ add_note.text }}
+                    {{ note_form.text }}
                 </p>
                 <p>
-                    {{ add_note.file }}
+                    {{ note_form.file }}
                 </p>
-                <button type="submit" class="save">Сохранить</button>
+                <a href="{% url 'main_page' %}">
+                    <button type="submit" class="save">Сохранить</button>
+                </a>
             </form>
-            </p>
         </div>
     </div>
 
 </div>
 
-<script src="/evernote/static/evernote/js/new_note.js"></script>
+<script type="module" src="{% static '/evernote/js/new_note.js' %}"></script>
+<script type="module" src="{% static '/evernote/js/cookie.js' %}"></script>
 
 </body>
 

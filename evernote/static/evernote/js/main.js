@@ -1,23 +1,6 @@
-// import Cookies from 'js-cookie'
 "use strict";
 
-// let csrftoken = Cookies.get('csrftoken');
-
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+import { getCookie } from "./cookie.js";
 
 const csrftoken = getCookie('csrftoken');
 
@@ -162,14 +145,11 @@ function showNotes(notes) {
         a.href = "#";
         deleteNote1.insertBefore(a, null);
 
-        deleteNote = document.createElement("button");
-        deleteNote.classList.add('deleteNote');
-        deleteNote.setAttribute("data-id", note.id);
-        a.insertBefore(deleteNote, null);
-
         img = new Image();
         img.src = "https://www.svgrepo.com/show/79440/delete-button.svg";
-        deleteNote.insertBefore(img, null);
+        img.classList.add('deleteNote');
+        img.setAttribute("data-id", note.id);
+        a.insertBefore(img, null);
         img.addEventListener('click', function () {
             fetch('/evernote/api/notes/' + img.dataset.id, {
                 method: 'DELETE',
@@ -244,30 +224,33 @@ const filterTag = document.querySelector('.filterTag');
 const filterButton = document.querySelector('.filterButton');
 let isFiltered = false;
 
-let url;
-if (filterTag === '') {
-    url = '/evernote/api/notes/?date=' + String(filterDate.value);
-} else if (filterDate === '') {
-    url = '/evernote/api/notes/?tags=' + String(filterTag);
-} else {
-    url = '/evernote/api/notes/?date=' + String(filterDate) + '&tags=' + String(filterTag);
-}
-
-url = `/evernote/api/notes/?date=${filterDate.value}`;
 
 filterButton.addEventListener('click', function () {
-    isFiltered = true;
-    rightBlock.innerHTML = '';
-    fetch(`/evernote/api/notes/?date=${filterDate.value}`, {
-        method: 'GET'
-    }).then(
-        response => {
-            return response.json();
+        if (filterDate.value !== '' || filterTag.value !== '') {
+            let url;
+            if (filterTag.value === '') {
+                url = `/evernote/api/notes/?date=${filterDate.value}`;
+            } else if (filterDate.value === '') {
+                url = `/evernote/api/notes/?tags=${filterTag.value}`;
+            } else {
+                url = `/evernote/api/notes/?date=${filterDate.value}&tags=${filterTag.value}`;
+            }
+            isFiltered = true;
+            rightBlock.innerHTML = '';
+            fetch(url, {
+                method: 'GET'
+            }).then(
+                response => {
+                    return response.json();
+                }
+            ).then(
+                notes => showNotes(notes)
+            );
         }
-    ).then(
-        notes => showNotes(notes)
-    );
-});
+    }
+)
+;
+
 
 if (!isFiltered) {
     fetch('/evernote/api/notes').then(

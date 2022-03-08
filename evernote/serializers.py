@@ -25,9 +25,8 @@ class StringListSerializer(serializers.ListSerializer):
 
 class NoteSerializer(serializers.ModelSerializer):
     person = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    tags = StringListSerializer()
+    tags = StringListSerializer(read_only=True)
 
     class Meta:
         model = Note
         fields = ('id', 'person', 'name', 'date', 'text', 'file', 'tags')
-        # read_only_fields = ('tags',)

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from evernote import views
-from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, TagViewSet, MainPage
+from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, TagViewSet, MainPage, NewNotePage
 from rest_framework import routers
 from django.views.decorators.csrf import csrf_exempt
 
@@ -48,7 +48,7 @@ urlpatterns = [
     path('evernote/login', LoginUser.as_view(), name='login_page'),
     path('evernote/logout', views.logout_user, name='logout'),
     # #
-    path('evernote/add-note', views.new_note, name='add-note_page'),
+    path('evernote/add-note', NewNotePage.as_view(), name='add-note_page'),
     # path('evernote/add-note', New_Note.as_view(), name='add-note_page'),
     #
     path('evernote/add-tag/<int:idnote>', views.new_tag, name='add-tag_page'),
