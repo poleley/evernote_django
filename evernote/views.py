@@ -110,18 +110,6 @@ class TagViewSet(viewsets.ModelViewSet):
     # permission_classes = (IsAuthenticated, )
 
 
-# class NewNote(APIView):
-#     renderer_classes = [TemplateHTMLRenderer]
-#     template_name = 'evernote/new_note.html'
-#
-#     def post(self, request):
-#         serializer = serializers.NoteSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 def download_file(request, idnote: int):
     file = Note.objects.get(pk=idnote).file
     response = HttpResponse(file)
@@ -130,30 +118,21 @@ def download_file(request, idnote: int):
     return response
 
 
-def deletenote_page(request, idnote: int):
-    if request.user.is_authenticated:
-        Note.objects.get(pk=idnote).delete()
-        response = {
-            'success': 'true',
-        }
-        return JsonResponse(response)
-
-
-def new_tag(request, idnote: int):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            add_tag = AddTagForm(request.POST)
-            if add_tag.is_valid():
-                added_tag = add_tag.save()
-                note_has_tag = NoteHasTag(note_id=idnote, tag_id=added_tag.id)
-                note_has_tag.save()
-            return redirect('main_page')
-        else:
-            add_tag = AddTagForm()
-        data = {'add_tag': add_tag, 'idnote': idnote}
-        return render(request, 'evernote/new_tag.html', data)
-    else:
-        return redirect('registration_page')
+# def new_tag(request, idnote: int):
+#     if request.user.is_authenticated:
+#         if request.method == 'POST':
+#             add_tag = AddTagForm(request.POST)
+#             if add_tag.is_valid():
+#                 added_tag = add_tag.save()
+#                 note_has_tag = NoteHasTag(note_id=idnote, tag_id=added_tag.id)
+#                 note_has_tag.save()
+#             return redirect('main_page')
+#         else:
+#             add_tag = AddTagForm()
+#         data = {'add_tag': add_tag, 'idnote': idnote}
+#         return render(request, 'evernote/new_tag.html', data)
+#     else:
+#         return redirect('registration_page')
 
 
 # class New_Tag(APIView):

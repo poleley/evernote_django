@@ -17,10 +17,10 @@ class Note(models.Model):
     date = models.DateField(auto_now=True, null=False)
     text = models.TextField(null=True)
     file = models.FileField(upload_to='notes_files/', null=True, blank=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     @property
-    def filename(self):
+    def name_of_file(self):
         return str(self.file).rsplit('/', 1)[1]
 
     def __str__(self):

@@ -263,4 +263,8 @@ html, body {
     cursor: pointer;
     opacity: .8;
 }
+.detailedDivNote .isFile:hover {
+    color: #4d4d4d;
+    cursor: pointer;
+}
 

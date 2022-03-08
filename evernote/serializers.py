@@ -25,8 +25,15 @@ class StringListSerializer(serializers.ListSerializer):
 
 class NoteSerializer(serializers.ModelSerializer):
     person = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    tags = StringListSerializer(read_only=True)
+    tags = StringListSerializer(required=False)
 
     class Meta:
         model = Note
         fields = ('id', 'person', 'name', 'date', 'text', 'file', 'tags')
+
+    def update(self, instance, validated_data):
+        tags = Tag.objects.get_or_create(name=validated_data['tags'][0])
+        note = instance
+        note.tags.set(tags)
+        note.save()
+        return note

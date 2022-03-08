@@ -6,6 +6,11 @@ const csrftoken = getCookie('csrftoken');
 
 const rightBlock = document.querySelector('.rightBlock');
 
+const rsplit = (str, sep, maxsplit) => {
+  const split = str.split(sep);
+  return maxsplit ? [split.slice(0, -maxsplit).join(sep)].concat(split.slice(-maxsplit)) : split;
+}
+
 function showNotes(notes) {
     for (let note of notes) {
         let divNote = document.createElement("div");
@@ -158,7 +163,6 @@ function showNotes(notes) {
                 }
             }).then(
                 response => {
-                    console.log({response});
                     return response.text();
                 }
             ).then(
@@ -186,9 +190,17 @@ function showNotes(notes) {
         if (!(note.file == null)) {
             let isFile = document.createElement("div");
             isFile.classList.add('isFile');
-            // добавить а href = download dile page
-            isFile.innerHTML = "Скачать файл " + note.file.filename;
+            // let downloadFile = document.createElement("a");
+            // добавить а href = download file page
+            isFile.innerHTML = "Скачать файл " + rsplit(String(note.file), '/', 1)[1];
             detailedDivNote.insertBefore(isFile, null);
+            isFile.addEventListener('click', function () {
+                window.location.href = `/evernote/download-file/${note.id}`;
+                // fetch(`/evernote/download-file/${note.id}`).then(
+                //     response => {
+                //         return response.text();
+                //     });
+            });
         }
 
         noteDate = document.createElement("div");
