@@ -1,17 +1,28 @@
 "use strict";
 
-import { getCookie } from "./cookie.js";
+import {getCookie} from "./cookie.js";
 
 const csrftoken = getCookie('csrftoken');
 
 const rightBlock = document.querySelector('.rightBlock');
 
 const rsplit = (str, sep, maxsplit) => {
-  const split = str.split(sep);
-  return maxsplit ? [split.slice(0, -maxsplit).join(sep)].concat(split.slice(-maxsplit)) : split;
+    const split = str.split(sep);
+    return maxsplit ? [split.slice(0, -maxsplit).join(sep)].concat(split.slice(-maxsplit)) : split;
+}
+
+function showTags(tags) {
+    let noteTags = document.querySelector('.noteTags');
+    for (let tag of tags) {
+        let noteTag = document.createElement("span");
+        noteTag.classList.add('noteTag');
+        noteTag.innerHTML = "#" + tag;
+        noteTags.insertBefore(noteTag, null);
+    }
 }
 
 function showNotes(notes) {
+
     for (let note of notes) {
         let divNote = document.createElement("div");
         divNote.classList.add('divNote');
@@ -110,15 +121,56 @@ function showNotes(notes) {
             noteTags.insertBefore(noteTag, null);
         }
 
-        let addTag = document.createElement("a");
-        a.href = "#";
-        // add href
-        noteTags.insertBefore(addTag, null);
+        let addTag;
 
         let addNewTag = document.createElement("button");
         addNewTag.classList.add('addNewTag');
         addNewTag.innerHTML = "+";
-        addTag.insertBefore(addNewTag, null);
+        noteTags.insertBefore(addNewTag, null);
+
+        let addTagForm = document.createElement("div");
+        addTagForm.classList.add('addTagForm');
+        addTagForm.setAttribute("data-id", note.id);
+        divNote.insertBefore(addTagForm, null);
+
+        let addTagForm2 = document.createElement("div");
+        addTagForm2.classList.add('addTagForm2');
+        addTagForm.insertBefore(addTagForm2, null);
+
+
+        // addNewTag.addEventListener('click', function () {
+        //     rightBlock.innerHTML = '_____';
+            // addNewTag = document.createElement("input");
+            // addNewTag.type = "text";
+            // addNewTag.addEventListener('submit', function () {
+            //     fetch('/evernote/api/v1/tags',
+            //         {
+            //             method: 'POST',
+            //             body: JSON.stringify({note_id: note.id, name: addNewTag.value}),
+            //             headers: {
+            //                 'X-CSRFToken': csrftoken,
+            //                 'content-type': 'application/json'
+            //             }
+            //         }).then(
+            //         response => {
+            //             return response.json();
+            //         }
+            //     );
+            // });
+            // noteTags.innerHTML = '';
+            // showTags(note.tags);
+            // // fetch('/evernote/api/v1/tags',
+            // //     {
+            // //         method: 'GET'
+            // //     }).then(
+            // //     response => {
+            // //         return response.json();
+            // //     }
+            // // ).then(
+            // //     tags => showTags(note.tags)
+            // // );
+            // addNewTag = addingNewTag();
+        // });
 
         let detailedView = document.createElement("div");
         detailedView.classList.add('detailedView');
@@ -196,10 +248,6 @@ function showNotes(notes) {
             detailedDivNote.insertBefore(isFile, null);
             isFile.addEventListener('click', function () {
                 window.location.href = `/evernote/download-file/${note.id}`;
-                // fetch(`/evernote/download-file/${note.id}`).then(
-                //     response => {
-                //         return response.text();
-                //     });
             });
         }
 
@@ -293,3 +341,5 @@ let menu = document.querySelector('.menu');
 showMenuButton.addEventListener('click', function () {
     menu.classList.toggle('displayBlock');
 });
+
+
