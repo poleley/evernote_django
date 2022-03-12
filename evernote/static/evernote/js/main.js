@@ -11,14 +11,41 @@ const rsplit = (str, sep, maxsplit) => {
     return maxsplit ? [split.slice(0, -maxsplit).join(sep)].concat(split.slice(-maxsplit)) : split;
 }
 
-function showTags(tags) {
-    let noteTags = document.querySelector('.noteTags');
-    for (let tag of tags) {
-        let noteTag = document.createElement("span");
-        noteTag.classList.add('noteTag');
-        noteTag.innerHTML = "#" + tag;
-        noteTags.insertBefore(noteTag, null);
-    }
+function addTagFunc(note, addTagForm, tagFormButton, tagForm, divNote) {
+    addTagForm.classList.remove('displayNone');
+    addTagForm.classList.add('displayFlex');
+
+    tagFormButton.addEventListener('click', function () {
+        if (tagForm.value !== '') {
+            fetch('/evernote/api/v1/tags', {
+                method: 'POST',
+                body: JSON.stringify({note_id: note.id, name: tagForm.value}),
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'content-type': 'application/json'
+                }
+            }).then(
+                response => {
+                    return response.json();
+                }
+            ).then(
+                text => {
+                    addTagForm.classList.remove('displayFlex');
+                    addTagForm.classList.add('displayNone');
+
+                    let newTag = document.createElement("span");
+                    newTag.classList.add('noteTag');
+                    newTag.innerHTML = '#' + tagForm.value;
+                    let parentElem = divNote.querySelector('.noteTags');
+                    let childElem = parentElem.querySelector('.addNewTag');
+                    parentElem.insertBefore(newTag, childElem);
+
+                }
+            );
+        } else {
+            alert('Добавьте имя тега!');
+        }
+    });
 }
 
 function showNotes(notes) {
@@ -121,8 +148,6 @@ function showNotes(notes) {
             noteTags.insertBefore(noteTag, null);
         }
 
-        let addTag;
-
         let addNewTag = document.createElement("button");
         addNewTag.classList.add('addNewTag');
         addNewTag.innerHTML = "+";
@@ -130,6 +155,7 @@ function showNotes(notes) {
 
         let addTagForm = document.createElement("div");
         addTagForm.classList.add('addTagForm');
+        addTagForm.classList.add('displayNone');
         addTagForm.setAttribute("data-id", note.id);
         divNote.insertBefore(addTagForm, null);
 
@@ -137,40 +163,28 @@ function showNotes(notes) {
         addTagForm2.classList.add('addTagForm2');
         addTagForm.insertBefore(addTagForm2, null);
 
+        let addTagFormTitle = document.createElement("div");
+        addTagFormTitle.classList.add('addTagFormTitle');
+        addTagFormTitle.innerHTML = `Добавить тег к заметке "${note.name}"`;
+        addTagForm2.insertBefore(addTagFormTitle, null);
 
-        // addNewTag.addEventListener('click', function () {
-        //     rightBlock.innerHTML = '_____';
-            // addNewTag = document.createElement("input");
-            // addNewTag.type = "text";
-            // addNewTag.addEventListener('submit', function () {
-            //     fetch('/evernote/api/v1/tags',
-            //         {
-            //             method: 'POST',
-            //             body: JSON.stringify({note_id: note.id, name: addNewTag.value}),
-            //             headers: {
-            //                 'X-CSRFToken': csrftoken,
-            //                 'content-type': 'application/json'
-            //             }
-            //         }).then(
-            //         response => {
-            //             return response.json();
-            //         }
-            //     );
-            // });
-            // noteTags.innerHTML = '';
-            // showTags(note.tags);
-            // // fetch('/evernote/api/v1/tags',
-            // //     {
-            // //         method: 'GET'
-            // //     }).then(
-            // //     response => {
-            // //         return response.json();
-            // //     }
-            // // ).then(
-            // //     tags => showTags(note.tags)
-            // // );
-            // addNewTag = addingNewTag();
-        // });
+        let tagForm = document.createElement("input");
+        tagForm.type = "text";
+        tagForm.classList.add('tagForm');
+        addTagForm2.insertBefore(tagForm, null);
+
+        let tagFormButtonDiv = document.createElement("div");
+        addTagForm2.insertBefore(tagFormButtonDiv, null);
+
+        let tagFormButton = document.createElement("button");
+        tagFormButton.classList.add('save');
+        tagFormButton.type = "submit";
+        tagFormButton.innerHTML = 'Сохранить';
+        tagFormButtonDiv.insertBefore(tagFormButton, null);
+
+        addNewTag.addEventListener('click', function () {
+            addTagFunc(note, addTagForm, tagFormButton, tagForm, divNote);
+        });
 
         let detailedView = document.createElement("div");
         detailedView.classList.add('detailedView');
@@ -242,8 +256,6 @@ function showNotes(notes) {
         if (!(note.file == null)) {
             let isFile = document.createElement("div");
             isFile.classList.add('isFile');
-            // let downloadFile = document.createElement("a");
-            // добавить а href = download file page
             isFile.innerHTML = "Скачать файл " + rsplit(String(note.file), '/', 1)[1];
             detailedDivNote.insertBefore(isFile, null);
             isFile.addEventListener('click', function () {
@@ -267,15 +279,15 @@ function showNotes(notes) {
             noteTags.insertBefore(noteTag, null);
         }
 
-        addTag = document.createElement("a");
-        a.href = "#";
-        // add href
-        noteTags.insertBefore(addTag, null);
+        let addNewTagHidden = document.createElement("button");
+        addNewTagHidden.classList.add('addNewTag');
+        addNewTagHidden.innerHTML = "+";
+        noteTags.insertBefore(addNewTagHidden, null);
 
-        addNewTag = document.createElement("button");
-        addNewTag.classList.add('addNewTag');
-        addNewTag.innerHTML = "+";
-        addTag.insertBefore(addNewTag, null);
+        addNewTagHidden.addEventListener('click', function () {
+            detailedView.classList.remove('displayFlex');
+            addTagFunc(note, addTagForm, tagFormButton, tagForm, detailedDivNote);
+        });
     }
 }
 
@@ -308,8 +320,7 @@ filterButton.addEventListener('click', function () {
             );
         }
     }
-)
-;
+);
 
 
 if (!isFiltered) {
@@ -341,5 +352,3 @@ let menu = document.querySelector('.menu');
 showMenuButton.addEventListener('click', function () {
     menu.classList.toggle('displayBlock');
 });
-
-

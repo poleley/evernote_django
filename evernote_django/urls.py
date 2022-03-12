@@ -16,13 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from evernote import views
-from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, TagViewSet, MainPage, NewNotePage, TagAPIView
+from evernote.views import RegisterUser, LoginUser, Landing, NoteViewSet, MainPage, NewNotePage, TagAPIView
 from rest_framework import routers
 from django.views.decorators.csrf import csrf_exempt
 
 router = routers.SimpleRouter()
 router.register(r'notes', NoteViewSet)
-router.register(r'tags', TagViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

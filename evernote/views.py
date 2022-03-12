@@ -59,14 +59,8 @@ class NoteViewSet(viewsets.ModelViewSet):
         if date is not None:
             queryset = queryset.filter(date=date)
         if tags is not None:
-            queryset = queryset.filter(tags=tags)
+            queryset = queryset.filter(tags__name=tags)
         return queryset
-
-
-class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all()
-    serializer_class = serializers.TagSerializer
-    # permission_classes = (IsAuthenticated, )
 
 
 class TagAPIView(APIView):
