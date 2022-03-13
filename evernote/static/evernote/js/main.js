@@ -11,42 +11,6 @@ const rsplit = (str, sep, maxsplit) => {
     return maxsplit ? [split.slice(0, -maxsplit).join(sep)].concat(split.slice(-maxsplit)) : split;
 }
 
-function addTagFunc(note, addTagForm, tagFormButton, tagForm, divNote) {
-    addTagForm.classList.remove('displayNone');
-    addTagForm.classList.add('displayFlex');
-
-    tagFormButton.addEventListener('click', function () {
-        if (tagForm.value !== '') {
-            fetch('/evernote/api/v1/tags', {
-                method: 'POST',
-                body: JSON.stringify({note_id: note.id, name: tagForm.value}),
-                headers: {
-                    'X-CSRFToken': csrftoken,
-                    'content-type': 'application/json'
-                }
-            }).then(
-                response => {
-                    return response.json();
-                }
-            ).then(
-                text => {
-                    addTagForm.classList.remove('displayFlex');
-                    addTagForm.classList.add('displayNone');
-
-                    let newTag = document.createElement("span");
-                    newTag.classList.add('noteTag');
-                    newTag.innerHTML = '#' + tagForm.value;
-                    let parentElem = divNote.querySelector('.noteTags');
-                    let childElem = parentElem.querySelector('.addNewTag');
-                    parentElem.insertBefore(newTag, childElem);
-
-                }
-            );
-        } else {
-            alert('Добавьте имя тега!');
-        }
-    });
-}
 
 function showNotes(notes) {
 
@@ -150,6 +114,7 @@ function showNotes(notes) {
 
         let addNewTag = document.createElement("button");
         addNewTag.classList.add('addNewTag');
+        addNewTag.setAttribute("data-id", note.id);
         addNewTag.innerHTML = "+";
         noteTags.insertBefore(addNewTag, null);
 
@@ -181,6 +146,45 @@ function showNotes(notes) {
         tagFormButton.type = "submit";
         tagFormButton.innerHTML = 'Сохранить';
         tagFormButtonDiv.insertBefore(tagFormButton, null);
+
+        function postTag() {
+            if (tagForm.value !== '') {
+                fetch('/evernote/api/v1/tags', {
+                    method: 'POST',
+                    body: JSON.stringify({note_id: note.id, name: tagForm.value}),
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                        'content-type': 'application/json'
+                    }
+                }).then(
+                    response => {
+                        return response.json();
+                    }
+                ).then(
+                    text => {
+                        addTagForm.classList.remove('displayFlex');
+                        addTagForm.classList.add('displayNone');
+
+                        let newTag = document.createElement("span");
+                        newTag.classList.add('noteTag');
+                        newTag.innerHTML = '#' + tagForm.value;
+                        let parentElem = divNote.querySelector('.noteTags');
+                        let childElem = parentElem.querySelector('.addNewTag');
+                        parentElem.insertBefore(newTag, childElem);
+                        tagForm.value = '';
+                    }
+                );
+            } else {
+                alert('Добавьте имя тега!');
+            }
+            tagFormButton.removeEventListener('click', postTag);
+        }
+
+        function addTagFunc(note, addTagForm, tagFormButton) {
+            addTagForm.classList.remove('displayNone');
+            addTagForm.classList.add('displayFlex');
+            tagFormButton.addEventListener('click', postTag);
+        }
 
         addNewTag.addEventListener('click', function () {
             addTagFunc(note, addTagForm, tagFormButton, tagForm, divNote);

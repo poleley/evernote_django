@@ -50,6 +50,7 @@ class NewNotePage(APIView):
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = serializers.NoteSerializer
+
     # permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
