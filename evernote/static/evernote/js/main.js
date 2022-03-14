@@ -171,13 +171,13 @@ function showNotes(notes) {
                         let parentElem = divNote.querySelector('.noteTags');
                         let childElem = parentElem.querySelector('.addNewTag');
                         parentElem.insertBefore(newTag, childElem);
+                        console.log(tagForm.value);
                         tagForm.value = '';
                     }
                 );
             } else {
                 alert('Добавьте имя тега!');
             }
-            tagFormButton.removeEventListener('click', postTag);
         }
 
         function addTagFunc(note, addTagForm, tagFormButton) {
